@@ -96,5 +96,3 @@ jobs:
       run: |
         kubectl get pods -n $K8S_NAMESPACE -l app=hello-world
         kubectl get services -n $K8S_NAMESPACE hello-world
-
-
