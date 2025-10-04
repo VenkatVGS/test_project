@@ -29,8 +29,8 @@ jobs:
         TF_FILES=$(find . -name "*.tf" | wc -l)
         echo "Found $TF_FILES Terraform files"
         
-        # Create security report
-        cat << EOF > gemini-security-report.md
+        # Create security report - FIXED: Remove indentation for EOF
+        cat << 'EOF' > gemini-security-report.md
 # 🔍 Gemini AI Security Scan Report
 
 **Scan Date:** $(date)
