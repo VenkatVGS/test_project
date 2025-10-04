@@ -36,6 +36,8 @@ module "eks" {
   project_name       = var.project_name
   private_subnet_ids = module.vpc.private_subnets
   cluster_version    = "1.28"
+  cluster_name    = "idurar-erp-cluster"
+  region          = var.aws_region
 }
 
 # Configure Kubernetes Provider

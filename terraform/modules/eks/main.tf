@@ -142,3 +142,33 @@ resource "aws_iam_role_policy_attachment" "ec2_container_registry_read_only" {
   role       = aws_iam_role.eks_node_group.name
 }
 
+# Custom SSM policy for the application
+resource "aws_iam_policy" "ssm_parameter_access" {
+  name        = "${var.cluster_name}-ssm-parameter-access"
+  description = "Policy for accessing SSM parameters"
+
+  policy = jsonencode({
+    Version = "2012-10-17"
+    Statement = [
+      {
+        Effect = "Allow"
+        Action = [
+          "ssm:GetParameter",
+          "ssm:GetParameters",
+          "ssm:GetParametersByPath"
+        ]
+        Resource = [
+          "arn:aws:ssm:${var.region}:${data.aws_caller_identity.current.account_id}:parameter/hello-world/*"
+        ]
+      }
+    ]
+  })
+}
+
+# Attach the policy to node group role
+resource "aws_iam_role_policy_attachment" "ssm_policy" {
+  role       = aws_iam_role.eks_node_group.name
+  policy_arn = aws_iam_policy.ssm_parameter_access.arn
+}
+
+data "aws_caller_identity" "current" {}
