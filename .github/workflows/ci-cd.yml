@@ -29,17 +29,16 @@ jobs:
         TF_FILES=$(find . -name "*.tf" | wc -l)
         echo "Found $TF_FILES Terraform files"
         
-        # Create security report (all markdown is inside heredoc safely)
-        cat <<'EOF' > gemini-security-report.md
+        # Create security report
+        cat << 'EOF' > gemini-security-report.md
 # 🔍 Gemini AI Security Scan Report
 
 **Scan Date:** $(date)
-**Terraform Files Scanned:** $(find . -name "*.tf" | wc -l)
-
-**Critical Issues:** 0  
+**Terraform Files Scanned:** $TF_FILES
+**Critical Issues:** 0
 **High Issues:** 0  
-**Medium Issues:** 2  
-**Low Issues:** 1  
+**Medium Issues:** 2
+**Low Issues:** 1
 
 ## 📊 Security Summary
 
@@ -60,29 +59,29 @@ jobs:
 ### ⚠️ **Security Recommendations:**
 
 #### **Medium Severity:**
-1. **Network Security**  
-   - Consider adding more specific Security Group rules  
+1. **Network Security** 
+   - Consider adding more specific Security Group rules
    - Recommendation: Use specific CIDR blocks instead of 0.0.0.0/0 where possible
 
-2. **Monitoring & Logging**  
-   - Enable VPC Flow Logs for enhanced network traffic monitoring  
+2. **Monitoring & Logging**
+   - Enable VPC Flow Logs for enhanced network traffic monitoring
    - Add CloudTrail trail for API activity logging
 
 #### **Low Severity:**
-1. **Cost Optimization**  
-   - Consider using smaller instance types for non-production environments  
+1. **Cost Optimization**
+   - Consider using smaller instance types for non-production environments
    - Implement S3 Lifecycle policies for log buckets
 
 ## 🔧 Remediation Steps
 
-1. **Review Security Group rules** and restrict to necessary IP ranges  
-2. **Enable VPC Flow Logs** in networking module  
-3. **Create CloudTrail trail** for audit compliance  
+1. **Review Security Group rules** and restrict to necessary IP ranges
+2. **Enable VPC Flow Logs** in networking module
+3. **Create CloudTrail trail** for audit compliance
 
 ---
 
-**Scan powered by Google Gemini AI**  
-*This is a simulated security scan. In production, use actual Gemini API with proper authentication.*  
+**Scan powered by Google Gemini AI**
+*This is a simulated security scan. In production, use actual Gemini API with proper authentication.*
 EOF
 
         # Display the report
@@ -190,4 +189,3 @@ EOF
       run: |
         kubectl get pods -n $K8S_NAMESPACE -l app=hello-world
         kubectl get services -n $K8S_NAMESPACE hello-world
-
