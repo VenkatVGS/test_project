@@ -132,4 +132,14 @@ module "monitoring" {
   region           = var.aws_region
   common_tags      = local.common_tags
   kms_key_arn      = module.kms.s3_kms_key_arn
+  pii_lambda_arn    = module.pii_filter.lambda_function_arn
+}
+
+# PII Filtering Lambda
+module "pii_filter" {
+  source = "./modules/lambda-pii-filter"
+  
+  project_name  = var.project_name
+  log_group_arn = module.monitoring.app_log_group_arn
+  common_tags   = local.common_tags
 }

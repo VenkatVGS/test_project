@@ -34,3 +34,8 @@ variable "kms_key_arn" {
   description = "KMS key ARN for encryption"
   type        = string
 }
+
+variable "pii_lambda_arn" {
+  description = "ARN of the PII filtering Lambda function"
+  type        = string
+}
