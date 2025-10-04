@@ -156,3 +156,10 @@ module "security" {
   database_username = "idurar_user"
   database_name     = "idurar_erp"
 }
+
+module "istio" {
+  source = "./modules/istio"
+
+  cluster_name = module.eks.cluster_name
+
+}
