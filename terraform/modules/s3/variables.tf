@@ -12,6 +12,6 @@ variable "environment" {
 variable "kms_key_arn" {
   description = "KMS key ARN for S3 encryption"
   type        = string
-  default     = null  # Default to AES256 if not provided
+  default     = null # Default to AES256 if not provided
 }
 

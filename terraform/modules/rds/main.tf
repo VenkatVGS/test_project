@@ -35,14 +35,14 @@ resource "aws_db_subnet_group" "main" {
 
 # RDS PostgreSQL Instance
 resource "aws_db_instance" "postgres" {
-  identifier              = "${var.project_name}-postgres"
-  engine                  = "postgres"
-  engine_version          = "15.14"
-  instance_class          = "db.t3.medium"
-  allocated_storage       = 20
-  max_allocated_storage   = 100
-  storage_encrypted       = true
-  kms_key_id             = var.kms_key_arn  # Change from kms_key_id to kms_key_arn
+  identifier            = "${var.project_name}-postgres"
+  engine                = "postgres"
+  engine_version        = "15.14"
+  instance_class        = "db.t3.medium"
+  allocated_storage     = 20
+  max_allocated_storage = 100
+  storage_encrypted     = true
+  kms_key_id            = var.kms_key_arn # Change from kms_key_id to kms_key_arn
 
   db_name  = "idurar"
   username = var.database_username
@@ -58,7 +58,7 @@ resource "aws_db_instance" "postgres" {
   backup_window           = "03:00-04:00"
   maintenance_window      = "Mon:04:00-Mon:05:00"
 
-  skip_final_snapshot    = false
+  skip_final_snapshot       = false
   final_snapshot_identifier = "${var.project_name}-final-snapshot"
 
   apply_immediately = true

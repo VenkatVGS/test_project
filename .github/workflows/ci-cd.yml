@@ -49,7 +49,7 @@ jobs:
     - name: Validate Terraform
       run: |
         cd terraform
-        terraform fmt -check
+        terraform fmt -check -diff -recursive
         terraform validate
 
   build-and-deploy:

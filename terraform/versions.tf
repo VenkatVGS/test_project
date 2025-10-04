@@ -17,9 +17,9 @@ terraform {
     }
   }
   backend "s3" {
-    bucket = "idurar-erp-terraform-state-90d47651"  # Replace with actual bucket name
-    key    = "terraform.tfstate"
-    region = "ap-south-1"
+    bucket  = "idurar-erp-terraform-state-90d47651" # Replace with actual bucket name
+    key     = "terraform.tfstate"
+    region  = "ap-south-1"
     encrypt = true
   }
 }
