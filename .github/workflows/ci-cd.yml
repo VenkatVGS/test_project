@@ -145,7 +145,7 @@ jobs:
   build-and-deploy:
     needs: test
     runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/feature/iac'
+    if: github.ref == 'refs/heads/master' || github.ref == 'refs/heads/feature/iac'
 
     steps:
     - uses: actions/checkout@v3
