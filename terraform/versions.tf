@@ -16,11 +16,11 @@ terraform {
       version = "~> 2.0"
     }
   }
-  #backend "s3" {
-   # bucket = "idurar-erp-terraform-state-ba1f188b"  # Replace with actual bucket name
-   # key    = "terraform.tfstate"
-   # region = "ap-south-1"
-   # encrypt = true
- # }
+  backend "s3" {
+    bucket = "idurar-erp-terraform-state-90d47651"  # Replace with actual bucket name
+    key    = "terraform.tfstate"
+    region = "ap-south-1"
+    encrypt = true
+  }
 }
 
