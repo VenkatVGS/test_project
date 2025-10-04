@@ -48,7 +48,7 @@ resource "aws_iam_policy" "lambda_policy" {
         Action = [
           "lambda:InvokeFunction"
         ]
-        Resource = "*"  # Allow invoking any Lambda (for testing)
+        Resource = "*" # Allow invoking any Lambda (for testing)
       }
     ]
   })
@@ -88,7 +88,7 @@ resource "aws_lambda_permission" "allow_cloudwatch" {
   action        = "lambda:InvokeFunction"
   function_name = aws_lambda_function.pii_filter.function_name
   principal     = "logs.amazonaws.com"
-  source_arn    = "${var.log_group_arn}:*"  
+  source_arn    = "${var.log_group_arn}:*"
 }
 
 # Create Lambda code zip
@@ -100,11 +100,11 @@ data "archive_file" "lambda_zip" {
 
 # Also add permission for specific log group
 resource "aws_lambda_permission" "allow_cloudwatch_log_group" {
-  statement_id  = "AllowExecutionFromCloudWatchLogs"
-  action        = "lambda:InvokeFunction"
-  function_name = aws_lambda_function.pii_filter.function_name
-  principal     = "logs.amazonaws.com"
-  source_arn    = var.log_group_arn
+  statement_id   = "AllowExecutionFromCloudWatchLogs"
+  action         = "lambda:InvokeFunction"
+  function_name  = aws_lambda_function.pii_filter.function_name
+  principal      = "logs.amazonaws.com"
+  source_arn     = var.log_group_arn
   source_account = data.aws_caller_identity.current.account_id
 }
 

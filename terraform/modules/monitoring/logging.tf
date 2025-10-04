@@ -20,7 +20,7 @@ resource "aws_cloudwatch_log_group" "infra_logs" {
 resource "aws_cloudwatch_log_subscription_filter" "pii_filter" {
   name            = "${var.project_name}-pii-filter"
   log_group_name  = aws_cloudwatch_log_group.app_logs.name
-  filter_pattern  = ""  # Process all logs
+  filter_pattern  = "" # Process all logs
   destination_arn = var.pii_lambda_arn
 
   depends_on = [aws_cloudwatch_log_group.app_logs]
