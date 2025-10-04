@@ -49,6 +49,7 @@ jobs:
     - name: Validate Terraform
       run: |
         cd terraform
+        terraform init -backend=false  # Initialize modules without backend
         terraform fmt -check -diff -recursive
         terraform validate
 
