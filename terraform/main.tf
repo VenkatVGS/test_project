@@ -120,3 +120,16 @@ module "ecr" {
   #  module.eks.node_group_iam_role_arn, # EKS node group role
   #]
 }
+
+# Monitoring and Observability
+module "monitoring" {
+  source = "./modules/monitoring"
+
+  project_name     = var.project_name
+  eks_cluster_name = module.eks.cluster_name
+  rds_instance_id  = module.rds.db_instance_id # Now this will work
+  redis_cluster_id = module.elasticache.redis_cluster_id
+  region           = var.aws_region
+  common_tags      = local.common_tags
+  kms_key_arn      = module.kms.s3_kms_key_arn
+}
