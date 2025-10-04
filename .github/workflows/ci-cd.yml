@@ -17,26 +17,26 @@ jobs:
   gemini-security-scan:
     name: 🔍 Gemini Security Scan
     runs-on: ubuntu-latest
-    
+
     steps:
     - uses: actions/checkout@v3
 
     - name: 🔍 Gemini Terraform Security Scan
       run: |
         echo "Starting Gemini Security Scan..."
-        
+
         # Count Terraform files
         TF_FILES=$(find . -name "*.tf" | wc -l)
         echo "Found $TF_FILES Terraform files"
-        
+
         # Create security report
-        cat << 'EOF' > gemini-security-report.md
+        cat > gemini-security-report.md <<'EOF'
 # 🔍 Gemini AI Security Scan Report
 
 **Scan Date:** $(date)
 **Terraform Files Scanned:** $TF_FILES
 **Critical Issues:** 0
-**High Issues:** 0  
+**High Issues:** 0
 **Medium Issues:** 2
 **Low Issues:** 1
 
@@ -59,7 +59,7 @@ jobs:
 ### ⚠️ **Security Recommendations:**
 
 #### **Medium Severity:**
-1. **Network Security** 
+1. **Network Security**
    - Consider adding more specific Security Group rules
    - Recommendation: Use specific CIDR blocks instead of 0.0.0.0/0 where possible
 
@@ -89,7 +89,7 @@ EOF
         echo "GEMINI SECURITY SCAN REPORT"
         echo "=========================================="
         cat gemini-security-report.md
-        
+
         # For PR comments simulation
         if [ "${{ github.event_name }}" == "pull_request" ]; then
           echo "SIMULATED: Posting security report to PR #${{ github.event.pull_request.number }}"
@@ -189,3 +189,4 @@ EOF
       run: |
         kubectl get pods -n $K8S_NAMESPACE -l app=hello-world
         kubectl get services -n $K8S_NAMESPACE hello-world
+
