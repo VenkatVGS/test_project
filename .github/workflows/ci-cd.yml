@@ -29,60 +29,59 @@ jobs:
         TF_FILES=$(find . -name "*.tf" | wc -l)
         echo "Found $TF_FILES Terraform files"
 
-        # Create security report
-        cat > gemini-security-report.md <<'EOF'
-# 🔍 Gemini AI Security Scan Report
-
-**Scan Date:** $(date)
-**Terraform Files Scanned:** $TF_FILES
-**Critical Issues:** 0
-**High Issues:** 0
-**Medium Issues:** 2
-**Low Issues:** 1
-
-## 📊 Security Summary
-
-✅ **Overall Security Score:** 88/100
-
-## 🎯 Detailed Findings
-
-### ✅ **Passed Security Checks:**
-- ✅ All S3 buckets have encryption enabled
-- ✅ RDS instances using KMS encryption at rest
-- ✅ IAM roles follow principle of least privilege
-- ✅ Security Groups properly configured
-- ✅ No hardcoded secrets in Terraform code
-- ✅ GuardDuty enabled for threat detection
-- ✅ AWS Config rules for compliance monitoring
-- ✅ SSM Parameter Store with KMS encryption
-
-### ⚠️ **Security Recommendations:**
-
-#### **Medium Severity:**
-1. **Network Security**
-   - Consider adding more specific Security Group rules
-   - Recommendation: Use specific CIDR blocks instead of 0.0.0.0/0 where possible
-
-2. **Monitoring & Logging**
-   - Enable VPC Flow Logs for enhanced network traffic monitoring
-   - Add CloudTrail trail for API activity logging
-
-#### **Low Severity:**
-1. **Cost Optimization**
-   - Consider using smaller instance types for non-production environments
-   - Implement S3 Lifecycle policies for log buckets
-
-## 🔧 Remediation Steps
-
-1. **Review Security Group rules** and restrict to necessary IP ranges
-2. **Enable VPC Flow Logs** in networking module
-3. **Create CloudTrail trail** for audit compliance
-
----
-
-**Scan powered by Google Gemini AI**
-*This is a simulated security scan. In production, use actual Gemini API with proper authentication.*
-EOF
+        # Create security report safely (no heredoc parsing issues)
+        {
+          echo "# 🔍 Gemini AI Security Scan Report"
+          echo ""
+          echo "**Scan Date:** $(date)"
+          echo "**Terraform Files Scanned:** $TF_FILES"
+          echo "**Critical Issues:** 0"
+          echo "**High Issues:** 0"
+          echo "**Medium Issues:** 2"
+          echo "**Low Issues:** 1"
+          echo ""
+          echo "## 📊 Security Summary"
+          echo ""
+          echo "✅ **Overall Security Score:** 88/100"
+          echo ""
+          echo "## 🎯 Detailed Findings"
+          echo ""
+          echo "### ✅ **Passed Security Checks:**"
+          echo "- ✅ All S3 buckets have encryption enabled"
+          echo "- ✅ RDS instances using KMS encryption at rest"
+          echo "- ✅ IAM roles follow principle of least privilege"
+          echo "- ✅ Security Groups properly configured"
+          echo "- ✅ No hardcoded secrets in Terraform code"
+          echo "- ✅ GuardDuty enabled for threat detection"
+          echo "- ✅ AWS Config rules for compliance monitoring"
+          echo "- ✅ SSM Parameter Store with KMS encryption"
+          echo ""
+          echo "### ⚠️ **Security Recommendations:**"
+          echo ""
+          echo "#### **Medium Severity:**"
+          echo "1. **Network Security**"
+          echo "   - Consider adding more specific Security Group rules"
+          echo "   - Recommendation: Use specific CIDR blocks instead of 0.0.0.0/0 where possible"
+          echo ""
+          echo "2. **Monitoring & Logging**"
+          echo "   - Enable VPC Flow Logs for enhanced network traffic monitoring"
+          echo "   - Add CloudTrail trail for API activity logging"
+          echo ""
+          echo "#### **Low Severity:**"
+          echo "1. **Cost Optimization**"
+          echo "   - Consider using smaller instance types for non-production environments"
+          echo "   - Implement S3 Lifecycle policies for log buckets"
+          echo ""
+          echo "## 🔧 Remediation Steps"
+          echo "1. **Review Security Group rules** and restrict to necessary IP ranges"
+          echo "2. **Enable VPC Flow Logs** in networking module"
+          echo "3. **Create CloudTrail trail** for audit compliance"
+          echo ""
+          echo "---"
+          echo ""
+          echo "**Scan powered by Google Gemini AI**"
+          echo "*This is a simulated security scan. In production, use actual Gemini API with proper authentication.*"
+        } > gemini-security-report.md
 
         # Display the report
         echo "=========================================="
