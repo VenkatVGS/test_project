@@ -33,3 +33,22 @@ resource "aws_kms_key" "s3" {
     Purpose = "S3 Encryption"
   }
 }
+
+# ECR KMS Key
+resource "aws_kms_key" "ecr" {
+  description             = "KMS key for ECR encryption"
+  deletion_window_in_days = 7
+  enable_key_rotation     = true
+
+  tags = merge(
+    var.common_tags,
+    {
+      Name = "${var.project_name}-ecr"
+    }
+  )
+}
+
+resource "aws_kms_alias" "ecr" {
+  name          = "alias/${var.project_name}-ecr"
+  target_key_id = aws_kms_key.ecr.key_id
+}

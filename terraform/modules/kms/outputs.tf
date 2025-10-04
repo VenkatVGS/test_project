@@ -29,3 +29,12 @@ output "s3_kms_key_arn" {
   value       = aws_kms_key.s3.arn
 }
 
+output "ecr_kms_key_arn" {
+  description = "ARN of the ECR KMS key"
+  value       = aws_kms_key.ecr.arn
+}
+
+output "ecr_kms_key_id" {
+  description = "ID of the ECR KMS key"
+  value       = aws_kms_key.ecr.key_id
+}

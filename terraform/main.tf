@@ -104,3 +104,17 @@ module "elasticache" {
   num_cache_nodes       = 1
 }
 
+
+# ECR Repository for hello-world service
+module "ecr" {
+  source = "./modules/ecr"
+
+  repository_name = "${var.project_name}-hello-world"
+ # kms_key_arn     = module.kms.ecr_kms_key_arn  # If you have KMS module
+  common_tags     = local.common_tags
+
+ # allowed_principal_arns = [
+  #  module.eks.cluster_iam_role_arn,  # EKS cluster role
+  #  module.eks.node_group_iam_role_arn, # EKS node group role
+  #]
+}
