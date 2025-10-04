@@ -90,7 +90,7 @@ module "rds" {
   private_subnet_ids      = module.vpc.private_subnets
   allowed_security_groups = [module.eks.cluster_primary_security_group_id]
   database_username       = "idurar_admin"
-  database_password = module.security.generated_db_password
+  database_password       = module.security.generated_db_password
   kms_key_arn             = module.kms.rds_kms_key_arn
 
   depends_on = [module.security]
@@ -150,9 +150,9 @@ module "pii_filter" {
 module "security" {
   source = "./modules/security"
 
-  project_name = var.project_name
-  common_tags  = local.common_tags
-  environment      = var.environment
+  project_name      = var.project_name
+  common_tags       = local.common_tags
+  environment       = var.environment
   database_username = "idurar_user"
-  database_name    = "idurar_erp" 
+  database_name     = "idurar_erp"
 }
