@@ -90,8 +90,10 @@ module "rds" {
   private_subnet_ids      = module.vpc.private_subnets
   allowed_security_groups = [module.eks.cluster_primary_security_group_id]
   database_username       = "idurar_admin"
-  database_password       = var.database_password
+  database_password = module.security.generated_db_password
   kms_key_arn             = module.kms.rds_kms_key_arn
+
+  depends_on = [module.security]
 }
 
 # Create ElastiCache Redis
@@ -142,4 +144,15 @@ module "pii_filter" {
   project_name  = var.project_name
   log_group_arn = module.monitoring.app_log_group_arn
   common_tags   = local.common_tags
+}
+
+# Security & Compliance
+module "security" {
+  source = "./modules/security"
+
+  project_name = var.project_name
+  common_tags  = local.common_tags
+  environment      = var.environment
+  database_username = "idurar_user"
+  database_name    = "idurar_erp" 
 }
