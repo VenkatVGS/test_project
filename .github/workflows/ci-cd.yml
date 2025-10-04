@@ -29,7 +29,7 @@ jobs:
         TF_FILES=$(find . -name "*.tf" | wc -l)
         echo "Found $TF_FILES Terraform files"
         
-        # Create security report - FIXED: Remove indentation for EOF
+        # Create security report
         cat << 'EOF' > gemini-security-report.md
 # 🔍 Gemini AI Security Scan Report
 
@@ -139,7 +139,7 @@ EOF
     - name: Validate Terraform
       run: |
         cd terraform
-        terraform init -backend=false  # Initialize modules without backend
+        terraform init -backend=false
         terraform fmt -check -diff -recursive
         terraform validate
 
