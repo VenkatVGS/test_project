@@ -125,7 +125,7 @@ This repository contains a complete AWS-native infrastructure implementation dem
 
    aws cloudwatch describe-alarms
 
-🏗️ Architecture
+## 🏗️ Architecture
 
 ┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
 │   GitHub Actions│    │   AWS EKS        │    │   AWS RDS       │
@@ -146,7 +146,7 @@ This repository contains a complete AWS-native infrastructure implementation dem
 │   Security      │    └──────────────────┘
 └─────────────────┘
 
-📁 Repository Structure
+## 📁 Repository Structure
 
 project/
 ├── .github/workflows/
@@ -196,25 +196,25 @@ project/
 
 ## 📊 Monitoring & Logging
 
-   Dashboard: CloudWatch dashboard idurar-erp-dashboard
+   **Dashboard:** CloudWatch dashboard idurar-erp-dashboard
 
-   Log Groups: /eks/idurar-erp-cluster/hello-world
+   **Log Groups:** /eks/idurar-erp-cluster/hello-world
 
-   Alarms: CPU, RDS lag, HTTP errors with SNS notifications
+   **Alarms:** CPU, RDS lag, HTTP errors with SNS notifications
 
 ## 🔒 Security Features
 
-   Encryption: All data encrypted at rest (KMS)
+   **Encryption:** All data encrypted at rest (KMS)
 
-   Network Security: Private subnets, security groups
+   **Network Security:** Private subnets, security groups
 
-   Access Control: IAM roles with least privilege
+   **Access Control:** IAM roles with least privilege
 
-   Compliance: AWS Config rules for best practices
+   **Compliance:** AWS Config rules for best practices
 
-   Threat Detection: GuardDuty with active monitoring
+   **Threat Detection:** GuardDuty with active monitoring
 
-   Secrets Management: SSM Parameter Store with encryption
+   **Secrets Management:** SSM Parameter Store with encryption
 
 ## 🛠️ Troubleshooting
 
