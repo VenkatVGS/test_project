@@ -176,7 +176,7 @@ project/
 └── README.md                  # Project documentation (this file)
 
 
-#🔧 Configuration:
+## 🔧 Configuration:
 
    **Environment Variables:**
 
@@ -186,7 +186,7 @@ project/
 
    RDS_IDENTIFIER: idurar-erp-postgres
 
-#SSM Parameters
+## SSM Parameters
 
    /idurar-erp/dev/DB_PASSWORD - Database credentials
 
@@ -194,7 +194,7 @@ project/
 
    /hello-world/message - Hello world message
 
-#📊 Monitoring & Logging
+## 📊 Monitoring & Logging
 
    Dashboard: CloudWatch dashboard idurar-erp-dashboard
 
@@ -202,7 +202,7 @@ project/
 
    Alarms: CPU, RDS lag, HTTP errors with SNS notifications
 
-#🔒 Security Features
+## 🔒 Security Features
 
    Encryption: All data encrypted at rest (KMS)
 
@@ -216,7 +216,7 @@ project/
 
    Secrets Management: SSM Parameter Store with encryption
 
-#🛠️ Troubleshooting
+## 🛠️ Troubleshooting
 
    **Common Issues:**
 
