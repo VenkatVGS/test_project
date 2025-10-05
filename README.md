@@ -89,36 +89,33 @@ This repository contains a complete AWS-native infrastructure implementation dem
    cd test_project/terraform
    terraform init
 
-2. Deploy Infrastructure:
-   terraform plan
-   terraform apply
+2. Deploy the Infrastructure
+terraform plan
+terraform apply
 
-3. Trigger CI/CD Pipeline:
+3. Trigger the CI/CD Pipeline
 
-# Follow instructions in DEMO_SCRIPT.md
+Follow the instructions in DEMO_SCRIPT.md, then push your changes to the main branch:
 
 git add .
-
 git commit -m "test: Trigger deployment"
-
 git push origin master
 
-4. Verification
+4. Verify Application Deployment
 
-Check Application:
+Check your pods and test the service:
 
 kubectl get pods -l app=hello-world
-
 kubectl run test-pod --image=curlimages/curl --rm -it --restart=Never -- curl http://hello-world:8080/
 
-5. Check Monitoring:
+5. Check Monitoring
+
+View dashboards and alarms:
 
 # View CloudWatch dashboard
-
 aws cloudwatch get-dashboard --dashboard-name idurar-erp-dashboard
 
 # Check alerts
-
 aws cloudwatch describe-alarms
 
 🏗️ Architecture
@@ -146,26 +143,31 @@ aws cloudwatch describe-alarms
 
 project/
 ├── .github/workflows/
-│   └── ci-cd.yml              # GitHub Actions pipeline
+│   └── ci-cd.yml              # GitHub Actions workflow for build, test, scan & deploy
+│
 ├── terraform/
 │   ├── main.tf                # Root Terraform configuration
-│   ├── variables.tf           # Input variables
-│   ├── outputs.tf             # Output values
+│   ├── variables.tf           # Input variables for modules
+│   ├── outputs.tf             # Exported outputs
 │   └── modules/               # Reusable Terraform modules
-│       ├── vpc/               # Networking
-│       ├── eks/               # Kubernetes cluster
-│       ├── rds/               # Database
-│       ├── security/          # Security & compliance
-│       ├── monitoring/        # Observability
-│       └── istio/             # Service mesh
+│       ├── vpc/               # Networking resources (VPC, subnets, IGW, NAT)
+│       ├── eks/               # EKS cluster and node groups
+│       ├── rds/               # PostgreSQL database (Multi-AZ)
+│       ├── security/          # IAM, KMS, and security configurations
+│       ├── monitoring/        # CloudWatch metrics, dashboards, alerts
+│       └── istio/             # Istio service mesh setup
+│
 ├── hello-world-service/       # Sample microservice
-│   ├── app.py                 # Flask application
-│   ├── test_app.py            # Unit tests
-│   └── Dockerfile             # Container definition
-├── helm-charts/               # Kubernetes deployments
-│   └── hello-world/           # Helm chart
-├── DEMO_SCRIPT.md             # Pipeline demo instructions
-└── README.md                  # This file
+│   ├── app.py                 # Flask application source code
+│   ├── test_app.py            # Unit tests using pytest
+│   └── Dockerfile             # Docker image definition
+│
+├── helm-charts/               # Helm charts for Kubernetes deployment
+│   └── hello-world/           # Helm chart for the Hello World service
+│
+├── DEMO_SCRIPT.md             # Step-by-step demo guide for CI/CD pipeline
+└── README.md                  # Project documentation (this file)
+
 
 🔧 Configuration:
 
