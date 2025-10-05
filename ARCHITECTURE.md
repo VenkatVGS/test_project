@@ -1,3 +1,8 @@
+# AWS DevOps Infrastructure Architecture
+
+## System Architecture Diagram
+
+```mermaid
 flowchart TB
     %% External Users
     User["👩‍💻 User / Developer"]
