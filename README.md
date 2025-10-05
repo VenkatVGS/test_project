@@ -91,34 +91,39 @@ This repository contains a complete AWS-native infrastructure implementation dem
 
 2. **Deploy the Infrastructure:**
 
-terraform plan
+   terraform plan
 
-terraform apply
+   terraform apply
 
 3. **Trigger the CI/CD Pipeline:**
 
-Follow the instructions in DEMO_SCRIPT.md, then push your changes to the main branch:
+   Follow the instructions in DEMO_SCRIPT.md, then push your changes to the main branch:
 
-git add .
-git commit -m "test: Trigger deployment"
-git push origin master
+   git add .
+
+   git commit -m "test: Trigger deployment"
+
+   git push origin master
 
 4. **Verify Application Deployment:**
 
-Check your pods and test the service:
+   Check your pods and test the service:
 
-kubectl get pods -l app=hello-world
-kubectl run test-pod --image=curlimages/curl --rm -it --restart=Never -- curl http://hello-world:8080/
+   kubectl get pods -l app=hello-world
+
+   kubectl run test-pod --image=curlimages/curl --rm -it --restart=Never -- curl http://hello-world:8080/
 
 5. **Check Monitoring:**
 
-View dashboards and alarms:
+   View dashboards and alarms:
 
-# View CloudWatch dashboard
-aws cloudwatch get-dashboard --dashboard-name idurar-erp-dashboard
+   View CloudWatch dashboard:
 
-# Check alerts
-aws cloudwatch describe-alarms
+   aws cloudwatch get-dashboard --dashboard-name idurar-erp-dashboard
+
+   Check alerts
+
+   aws cloudwatch describe-alarms
 
 🏗️ Architecture
 
@@ -171,62 +176,62 @@ project/
 └── README.md                  # Project documentation (this file)
 
 
-🔧 Configuration:
+#🔧 Configuration:
 
-Environment Variables:
+   **Environment Variables:**
 
-AWS_REGION: ap-south-1
+   AWS_REGION: ap-south-1
 
-EKS_CLUSTER_NAME: idurar-erp-cluster
+   EKS_CLUSTER_NAME: idurar-erp-cluster
 
-RDS_IDENTIFIER: idurar-erp-postgres
+   RDS_IDENTIFIER: idurar-erp-postgres
 
-SSM Parameters:
+#SSM Parameters
 
-/idurar-erp/dev/DB_PASSWORD - Database credentials
+   /idurar-erp/dev/DB_PASSWORD - Database credentials
 
-/idurar-erp/dev/APP_SECRET - Application secret
+   /idurar-erp/dev/APP_SECRET - Application secret
 
-/hello-world/message - Hello world message
+   /hello-world/message - Hello world message
 
-📊 Monitoring & Logging
+#📊 Monitoring & Logging
 
-Dashboard: CloudWatch dashboard idurar-erp-dashboard
+   Dashboard: CloudWatch dashboard idurar-erp-dashboard
 
-Log Groups: /eks/idurar-erp-cluster/hello-world
+   Log Groups: /eks/idurar-erp-cluster/hello-world
 
-Alarms: CPU, RDS lag, HTTP errors with SNS notifications
+   Alarms: CPU, RDS lag, HTTP errors with SNS notifications
 
-🔒 Security Features
+#🔒 Security Features
 
-Encryption: All data encrypted at rest (KMS)
+   Encryption: All data encrypted at rest (KMS)
 
-Network Security: Private subnets, security groups
+   Network Security: Private subnets, security groups
 
-Access Control: IAM roles with least privilege
+   Access Control: IAM roles with least privilege
 
-Compliance: AWS Config rules for best practices
+   Compliance: AWS Config rules for best practices
 
-Threat Detection: GuardDuty with active monitoring
+   Threat Detection: GuardDuty with active monitoring
 
-Secrets Management: SSM Parameter Store with encryption
+   Secrets Management: SSM Parameter Store with encryption
 
-🛠️ Troubleshooting
+#🛠️ Troubleshooting
 
-Common Issues
+   **Common Issues:**
 
-Terraform State Locked:
+   **Terraform State Locked:**
 
-terraform force-unlock [LOCK_ID]
+   terraform force-unlock [LOCK_ID]
 
-EKS Authentication:
+   **EKS Authentication:**
 
-aws eks update-kubeconfig --region ap-south-1 --name idurar-erp-cluster
+   aws eks update-kubeconfig --region ap-south-1 --name idurar-erp-cluster
 
-Pipeline Failures:
+   **Pipeline Failures:**
 
-Check GitHub Actions logs
+   Check GitHub Actions logs
 
-Verify AWS credentials in secrets
+   Verify AWS credentials in secrets
 
-Confirm ECR repository exists
+   Confirm ECR repository exists
