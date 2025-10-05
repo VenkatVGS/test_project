@@ -89,11 +89,13 @@ This repository contains a complete AWS-native infrastructure implementation dem
    cd test_project/terraform
    terraform init
 
-2. Deploy the Infrastructure
+2. **Deploy the Infrastructure:**
+
 terraform plan
+
 terraform apply
 
-3. Trigger the CI/CD Pipeline
+3. **Trigger the CI/CD Pipeline:**
 
 Follow the instructions in DEMO_SCRIPT.md, then push your changes to the main branch:
 
@@ -101,14 +103,14 @@ git add .
 git commit -m "test: Trigger deployment"
 git push origin master
 
-4. Verify Application Deployment
+4. **Verify Application Deployment:**
 
 Check your pods and test the service:
 
 kubectl get pods -l app=hello-world
 kubectl run test-pod --image=curlimages/curl --rm -it --restart=Never -- curl http://hello-world:8080/
 
-5. Check Monitoring
+5. **Check Monitoring:**
 
 View dashboards and alarms:
 
